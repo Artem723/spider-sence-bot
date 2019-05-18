@@ -1,0 +1,12 @@
+{
+    "name": "spider-sense-bot",
+    "version": "0.0.1",
+    "description": "Telegram bot",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no tests specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "author": "Artsiom Sauchuk",
+    "license": "MIT" 
+}
