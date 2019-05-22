@@ -33,9 +33,9 @@ function createNotificationServerHandler(bot) {
         if (req.method === 'GET' && pathname === '/notification' && query && query.device_id) {
             const dataEntity = dataStub.find(el => el.device_id === query.device_id);
             if (dataEntity) {
-                bot.sendMessage(dataEntity.chat_id, `❗`);
+                dataEntity.chat_id && bot.sendMessage(dataEntity.chat_id, `❗`);
                 res.writeHead(200, { "Content-Type": "text/plain" });
-                res.end("Hello World");
+                res.end(dataEntity.chat_id ? 'Ok, notified!' : 'Client is not connected!');
             } else {
                 res.writeHead(400, { "Content-Type": "text/plain" });
                 res.end(`Device with id:${query.device_id}! 😢`);
