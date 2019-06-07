@@ -28,7 +28,8 @@ function createNotificationServerHandler(bot) {
             db.getDocByDeviceId(q.device_id, (doc) => {
                 if (doc) { // send message to moltiple receivers with chat id
                     doc.chat_ids && doc.chat_ids.forEach(id => {
-                        bot.sendMessage(id, `❗ - device: ${doc.device_id}`);
+                        const name = q.name;
+                        bot.sendMessage(id, createInfoMsg(doc, name));
                         if (q.lat && q.lon) bot.sendLocation(id, q.lat, q.lon);
                     });
                     res.writeHead(200, { "Content-Type": "text/plain" });
@@ -47,3 +48,7 @@ function createNotificationServerHandler(bot) {
 exports.createEchoHandler = createEchoHandler;
 exports.createNotificationServerHandler = createNotificationServerHandler;
 exports.createTierHandler = createTierHandler;
+
+function createInfoMsg(doc, name) {
+    return `❗ - device: ${doc.device_id};${name ? '\nname: ' + name : ''}`;
+}
