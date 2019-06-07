@@ -11,7 +11,9 @@ let db = null;
 let col = null;
 
 client.connect((err) => {
+    if (err) throw err;
     console.log("Connected successfully to server");
+    
     db = client.db(dbName);
     col = db.collection(colName);
 });
