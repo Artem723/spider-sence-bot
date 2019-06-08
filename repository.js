@@ -1,3 +1,12 @@
+/**
+ * Module for mongoDB operations
+ * 
+ * The schema of documents:
+ * {
+ *  deviceId: String,
+ *  chat_ids: [String],
+ * }
+ */
 const MongoClient = require('mongodb').MongoClient;
 
 const mongoUser = process.env.MONGO_USER;
@@ -17,7 +26,12 @@ client.connect((err) => {
     db = client.db(dbName);
     col = db.collection(colName);
 });
-
+/**
+ * Attach telegram user's chat with 'chatId' to the particular device with 'deviceId'
+ * @param {String} deviceId
+ * @param {String} chatId
+ * @param {Function} cb - callback
+ */
 function setChatId(deviceId, chatId, cb) {
     if (!col) {
         cb(null);
@@ -39,9 +53,11 @@ function setChatId(deviceId, chatId, cb) {
         }
     })});    
 }
-
-// function updateUser(col, doc, deviceId, chat)
-
+/**
+ * Retrieve a document for particular device by its id
+ * @param {String} deviceId
+ * @param {Function} cb - callback
+ */
 function getDocByDeviceId(deviceId, cb) {
     col && col.find({ device_id: deviceId }).limit(1).next((err, doc) => {
         if (err) {

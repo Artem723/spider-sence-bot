@@ -7,7 +7,7 @@
     "test": "echo \"Error: no tests specified\" && exit 1",
     "start": "node index.js"
   },
-  "author": "Artsiom Sauchuk",
+  "author": "Artsiom Sauchuk, Giuseppe Capaldi, Marco Costa",
   "license": "MIT",
   "dependencies": {
     "mongodb": "^3.2.5",

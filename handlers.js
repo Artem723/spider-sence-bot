@@ -1,12 +1,21 @@
 const url = require('url');
 const db = require('./repository');
 
+/**
+ * Handler creator for echo request from telegram
+ * @param {Object} bot - instance of telegram bot API
+ * @returns {Function} - handler 
+ */
 function createEchoHandler(bot) {
     return function onEcho(msg, match) {
         bot.sendMessage(msg.chat.id, match[1]);
     }
 }
-
+/**
+ * Handler creator for "tie" request which connects a user to particular device;
+ * @param {Object} bot - instance of telegram bot API
+ * @returns {Function} - handler
+ */
 function createTierHandler(bot) {
     return function onTie(msg, match) {
         const deviceId = match[1];
@@ -19,7 +28,11 @@ function createTierHandler(bot) {
         });
     }
 }
-
+/**
+ * Creates REST request handler for sending notifications to Telegram users 
+ * @param {Object} bot - instance of telegram bot API
+ * @returns {Function} - handler
+ */
 function createNotificationServerHandler(bot) {
     return function onDeviceNotification(req, res) {
         const { pathname, query: q } = url.parse(req.url, true);
@@ -45,10 +58,16 @@ function createNotificationServerHandler(bot) {
     }
 }
 
-exports.createEchoHandler = createEchoHandler;
-exports.createNotificationServerHandler = createNotificationServerHandler;
-exports.createTierHandler = createTierHandler;
-
+/**
+ * Creates notification message 
+ * @param {Object} doc - document from MongoDB collection
+ * @param {String} name - name of a user
+ * @returns {String}
+ */
 function createInfoMsg(doc, name) {
     return `❗ - device: ${doc.device_id};${name ? '\nname: ' + name : ''}`;
 }
+
+exports.createEchoHandler = createEchoHandler;
+exports.createNotificationServerHandler = createNotificationServerHandler;
+exports.createTierHandler = createTierHandler;
