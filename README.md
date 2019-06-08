@@ -7,7 +7,7 @@ A simple telegram bot which is a part of [Spider sense project](https://github.c
 
 The purpose of this telegram bot is to let people who are interested in particular [device](https://github.com/not-a-genius/spiderSense#description), receive urgent notifications from it.
 
-### how does it work
+### How does it work
 
 A device sends GET request with its id to the server which also serves as a Telegram bot. Then, the bot will send notifications to users who are associated with the device. It's also possible to send geo data(latitude and longitude) about current position to the server so people in charge of will also know where the device is.
 
@@ -15,14 +15,14 @@ Example of a message from the bot:
 
 ![message-example-img](https://github.com/Artem723/spider-sence-bot/blob/master/imgs/Message_example.png?raw=true"message")
 
-To associate a Telegram account with a device, user should speak with bot and send to hom the following command:
+To associate a Telegram account with a device, user should speak with the bot and send to him the following command:
 
 ```
 /tie {device}
 ```
 Where `device` -- is a device id.
 
-After this, if the device with such id will send a request, the user will be notified.
+So, if the device with such id will send a request, the user will be notified.
 
 To store telegram accounts associated with devices, the server uses MongoDB.
 
@@ -48,9 +48,26 @@ To store telegram accounts associated with devices, the server uses MongoDB.
 
 ## Getting started
 
-### Configuration
+To start using this bot, you need to speak with the [@BotFather ](https://telegram.me/BotFather) first, to receive a `TOKEN`;
 
-### Usage
+Also you need a mongoDB instance with the following schema of documents:
+
+```js
+  {
+   "deviceId": String,
+   "chat_ids": [String],
+  }
+```
+
+After that, create an `.env` file write this:
+
+```
+PORT=8080
+TELEGRAM_TOKEN=<YOUR_TELEGRAM_TOKEN>
+MONGO_USER=<MONGO_USER>
+MONGO_PASSWORD=<MONGO_PASSWORD>
+```
+Since node.js doesn't read from `.env` file by default, you will need additional tools for that. For example [dotenv](https://www.npmjs.com/package/dotenv) package.
 
 ## Credits
 
@@ -58,7 +75,7 @@ To store telegram accounts associated with devices, the server uses MongoDB.
 					[<img src="https://raw.githubusercontent.com/not-a-genius/spiderSense/master/our_doc/readme_images/inIcon.png" height="20" width="20" >](https://www.linkedin.com/in/giuseppe-capaldi-56688a171/)
 - Marco Costa [<img src="https://raw.githubusercontent.com/not-a-genius/spiderSense/master/our_doc/readme_images/gitIcon.png" height="20" width="20" >](https://github.com/marcocosta96/)
 					[<img src="https://raw.githubusercontent.com/not-a-genius/spiderSense/master/our_doc/readme_images/inIcon.png" height="20" width="20" >](https://www.linkedin.com/in/marco-costa-ecs)
-- Artem Savchuck [<img src="https://raw.githubusercontent.com/not-a-genius/spiderSense/master/our_doc/readme_images/gitIcon.png" height="20" width="20" >](https://github.com/Artem723)
+- Artsiom Sauchuk [<img src="https://raw.githubusercontent.com/not-a-genius/spiderSense/master/our_doc/readme_images/gitIcon.png" height="20" width="20" >](https://github.com/Artem723)
  					[<img src="https://raw.githubusercontent.com/not-a-genius/spiderSense/master/our_doc/readme_images/inIcon.png" height="20" width="20" >](https://www.linkedin.com/in/artem-savchuk-7278a7170/)
 
 ## Licence
