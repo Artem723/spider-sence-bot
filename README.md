@@ -59,7 +59,7 @@ Also you need a mongoDB instance with the following schema of documents:
   }
 ```
 
-After that, create an `.env` file write this:
+After that, create an `.env` file and write this:
 
 ```
 PORT=8080
@@ -68,6 +68,15 @@ MONGO_USER=<MONGO_USER>
 MONGO_PASSWORD=<MONGO_PASSWORD>
 ```
 Since node.js doesn't read from `.env` file by default, you will need additional tools for that. For example [dotenv](https://www.npmjs.com/package/dotenv) package.
+
+### Running the bot
+
+To run you can use even your own machine. This server receives events from Telegram using [polling technique](https://en.wikipedia.org/wiki/Polling_(computer_science)).
+
+So, just open the root folder of the project and type to the shall `npm install` which will install all dependencies. This operation should be done only once.
+
+
+Then, type `npm run start` to finally run this app.
 
 ## Credits
 
